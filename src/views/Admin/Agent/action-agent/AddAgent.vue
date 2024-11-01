@@ -67,7 +67,7 @@
 							<!-- Position -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">មុខតំណែង</label>
-								<select v-model="form.positionId" required
+								<select v-model="form.positionId" required 
 									class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
 									<option v-for="position in positions" :key="position.id" :value="position.id">{{ position.name }}
 									</option>
@@ -210,7 +210,7 @@ const form = ref({
 	communeName_kh: null,
 	districtName_kh: null,
 	provinceName_kh: null,
-	status: false,
+	status: true,
 	branchId: "",
 	created_By: store.getters.getUserId,
 	update_By: store.getters.getUserId,
@@ -267,7 +267,7 @@ const fetchBranches = async () => {
 const fetchPositions = async () => {
 	try {
 		const response = await axios.get(`${baseUrl}/positions`);
-		positions.value = response.data;
+		positions.value = response.data.filter(position => position.name === "ភ្នាក់ងារ");
 	} catch (error) {
 		console.error("Error fetching positions:", error);
 	}

@@ -38,7 +38,7 @@
 						<td class="px-6 siemreap-regular border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.branch.name }}</td>
 						<td class="px-6 siemreap-regular py-4 border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.villageName }}</td>
 						<td class="px-6 siemreap-regular py-4 border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.provinceName }}</td>
-						<td class="px-6 siemreap-regular border whitespace-nowrap overflow-hidden text-ellipsis" :class="{ 'text-[#00992B]': item.status, 'text-red-600': !item.status }">{{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}</td>
+						<td class="px-6 siemreap-regular border whitespace-nowrap overflow-hidden text-ellipsis" :class="{ 'text-red-600': !item.status }">{{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}</td>
 						<td class="flex siemreap-regular border justify-center px-6 py-2 text-center w-[150px]">
 							<router-link :to="{ name: 'agent-detail', params: { id: item.id } }">
 								<button class="px-4 py-2 bg-blue-50 text-center text-[#00992B] rounded-md">លម្អិត</button>
