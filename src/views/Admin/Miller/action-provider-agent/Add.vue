@@ -1,0 +1,176 @@
+<template>
+	<div class="bg-white h-hvd rounded-lg pb-5">
+		<p class="p-5 text-lg font-semibold underline text-[#00992B] moul-regular">បង្កើតទិន្នន័យបែងចែក</p>
+		<!-- Display Agent Details -->
+		<form @submit.prevent="updateAgent">
+			<div class="my-5">
+				<div class="grid md:grid-cols-3 md:gap-6">
+					<!-- សាខា -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							សាខា:
+						</label>
+						<input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+							
+						</input>
+					</div>
+					<!-- ភូមិ -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							ភូមិ:
+						</label>
+                        <input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+							
+						</input>
+					</div>
+					<!-- ខេត្ត -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							ខេត្ត:
+						</label>
+                        <input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+                            
+						</input>
+					</div>
+                    <!-- 	បរិមាណអង្ករ -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							បរិមាណអង្ករ:
+						</label>
+                        <input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+                            
+						</input>   
+					</div>
+                    <!-- ចំនួនអង្ករ -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							ចំនួនអង្ករ:
+						</label>
+                        <input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+                            
+						</input>
+					</div>
+                    <!-- ភ្នាក់ងារ -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							ភ្នាក់ងារ:
+						</label>
+                        <input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+                            
+						</input>  
+					</div>
+                    <!-- ធ្វើដោយ -->
+					<div class="mb-3 px-5 flex">
+						<label class="block w-[150px] pt-2 text-md text-gray-700">
+							ធ្វើដោយ:
+						</label>
+                        <input class="w-full siemreap-regular text-gray-700 text-bold border px-3 py-2 rounded-lg">
+                            
+						</input>  
+					</div>
+				</div>
+				<div class="flex justify-end mt-4 mr-5 ">
+					<button type="submit" class="px-4 py-2 bg-[#00992B] text-white rounded">
+						យល់ព្រមបង្កើត
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</template>
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import axios from "axios";
+const authToken = import.meta.env.VITE_API_AUTH_TOKEN; // Ensure this is defined in your .env file
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+const agent = ref({
+	id: "",
+	name: "",
+	gender: "",
+	dob: "",
+	tel1: "",
+	tel2: "",
+	tel3: "",
+	positionId: null, // Update to match the API structure
+	commission: 0,
+	branchId: 0,
+	villageCode: "",
+	active: true,
+	created_By: "",
+	created_At: "",
+	updated_By: "",
+	updated_At: "",
+});
+
+const positions = ref([]); // To store the positions data
+
+const formattedDob = computed({
+	get() {
+		return agent.value.dob ? agent.value.dob.split("T")[0] : "";
+	},
+	set(value) {
+		agent.value.dob = value;
+	},
+});
+const fetchPositions = async () => {
+	try {
+		const response = await axios.get(`${apiBaseUrl}/core/position`, {
+			headers: {
+				Authorization: `Bearer ${authToken}`, // Check that this header is correctly set
+			},
+		});
+		positions.value = response.data.data;
+	} catch (error) {
+		console.error("Error fetching positions:", error);
+	}
+};
+
+console.log("API Base URL:", apiBaseUrl);
+
+const updateAgent = async () => {
+	try {
+		const response = await axios.put(`${apiBaseUrl}/agent/${agent.value.id}`, {
+			name: agent.value.name,
+			gender: agent.value.gender,
+			dob: agent.value.dob,
+			tel1: agent.value.tel1,
+			tel2: agent.value.tel2,
+			tel3: agent.value.tel3,
+			positionId: agent.value.positionId,
+			commission: agent.value.commission,
+			branchId: agent.value.branchId,
+			villageCode: agent.value.villageCode,
+			active: agent.value.active,
+			created_By: agent.value.created_By,
+			created_At: agent.value.created_At,
+			updated_By: agent.value.updated_By,
+			updated_At: agent.value.updated_At,
+		});
+		alert("Agent updated successfully");
+	} catch (error) {
+		alert("Error updating agent");
+		console.error(error);
+	}
+};
+
+onMounted(() => {
+	fetchPositions(); // Fetch position data when the component is mounted
+});
+</script>
+
+<style scoped>	
+.bg-black {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.moul-regular {
+	font-family: 'Moul', serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.siemreap-regular {
+	font-family: 'Siemreap', sans-serif;
+}
+</style>
