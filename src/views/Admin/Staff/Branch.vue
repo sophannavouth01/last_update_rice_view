@@ -64,7 +64,7 @@
 						</td>
 
 						<td class="px-6 py-4 border whitespace-nowrap overflow-hidden text-ellipsis"
-							:class="{ 'text-[#00992B]': item.status, 'text-red-600': !item.status }">
+							:class="{ 'text-red-600': !item.status }">
 							{{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}
 						</td>
 						<td class="border flex justify-center px-6 py-2 text-center w-[150px]">

@@ -1,194 +1,267 @@
 <template>
-	<div class="relative flex flex-col min-w-0 break-words w-full mb-3 shadow-lg rounded-lg bg-white border-0 p-5">
-		<p class="text-lg font-semibold underline text-[#00992B] moul-regular mb-6">
-			បុគ្គលិកលម្អិត
-		</p>
-		<div v-if="staffData && staffData.staff">
-			<section class="bg-blueGray-50">
-				<div class="w-full mx-auto mt-6">
-					<form>
-						<div class="flex flex-wrap">
-							<!-- Khmer Name -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ឈ្មោះភាសាខ្មែរ</label>
-								<input type="text" v-model="staffData.staff.name" disabled
-									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- English Name -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ឈ្មោះឡាតាំង</label>
-								<input type="text" v-model="staffData.staff.en_Name" disabled
-									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Gender -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ភេទ</label>
-								<input type="text" v-model="genderLabel" disabled
-									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Branch -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">សាខា</label>
-								<input type="text" v-model="staffData.branch.name" disabled
-									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Position -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">មុខតំណែង</label>
-								<input type="text" v-model="staffData.position.name" disabled
-									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Hire Date -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ថ្ងៃចូលបម្រើការងារ</label>
-								<input type="text" :value="staffData.staff.hireDate" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Salary -->
-							<!-- <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ប្រាក់ខែ</label>
-								<input type="number" v-model="staffData.staff.baseSalary" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div> -->
-							<!-- Metfone Phone -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">Metfone</label>
-								<input type="text" v-model="staffData.staff.tel_Metfone" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Cellcard Phone -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">Cellcard</label>
-								<input type="text" v-model="staffData.staff.tel_Cellcard" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<!-- Smart Phone -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">Smart</label>
-								<input type="text" v-model="staffData.staff.tel_Smart" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ភូមិ</label>
-								<input type="text" :value="staffData.address.villageName" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ឃុំ</label>
-								<input type="text" :value="staffData.address.communeName" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ស្រុក</label>
-								<input type="text" :value="staffData.address.districtName" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ខេត្ត</label>
-								<input type="text" :value="staffData.address.provinceName" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">Username Account</label>
-								<input type="text" :value="staffData.user.userName" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">Email Account</label>
-								<input type="text" :value="staffData.user.email" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">Role</label>
-								<input type="text" :value="staffData.user.role" disabled
-									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
-							
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ស្ថានភាព</label>
-								<input type="text" :value="staffData.staff.active ? 'ដំណើរការ' : 'ឈប់'"
-									:class="staffData.staff.active ? 'text-[#00992B]' : 'text-red-500'" disabled
-									class="border px-3 py-2 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
+    <div class="relative flex flex-col min-w-0 break-words w-full mb-3 shadow-lg rounded-lg bg-white border-0 p-5">
+        <p class="text-lg font-semibold underline text-[#00992B] moul-regular mb-6">
+            កែប្រែបុគ្គលិក
+        </p>
+        <div>
+            <section class="bg-blueGray-50">
+                <div class="w-full mx-auto mt-6">
+                    <form @submit.prevent="handleSubmit">
+                        <div class="flex flex-wrap">
+                            <!-- Name -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">ឈ្មោះសាខា</label>
+                                <input type="text" v-model="form.name" required
+                                    class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
+                            </div>
 
+                            <!-- Province -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">ខេត្ត</label>
+                                <select v-model="form.provinceName_kh" @change="filterDistricts" required
+                                    class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
+                                    <option v-for="province in provinces" :key="province.code" :value="province.code">
+                                        {{ province.name_kh }}
+                                    </option>
+                                </select>
+                            </div>
 
-							</div>
-						</div>
-					</form>
-				</div>
-			</section>
-		</div>
-		<div v-else>
-			<p>Loading staff details...</p>
-		</div>
-	</div>
+                            <!-- District -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">ស្រុក</label>
+                                <select v-model="form.districtName_kh" @change="filterCommunes" required
+                                    class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
+                                    <option v-for="district in filteredDistricts" :key="district.code"
+                                        :value="district.code">
+                                        {{ district.name_kh }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Commune -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">ឃុំ</label>
+                                <select v-model="form.communeName_kh" @change="filterVillages" required
+                                    class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
+                                    <option v-for="commune in filteredCommunes" :key="commune.code"
+                                        :value="commune.code">
+                                        {{ commune.name_kh }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Village -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">ភូមិ</label>
+                                <select v-model="form.villageName_kh" required
+                                    class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
+                                    <option v-for="village in filteredVillages" :key="village.code"
+                                        :value="village.code">
+                                        {{ village.name_kh }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Branch Manager -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">នាយកសាខា</label>
+                                <select v-model="form.branchManager" 
+                                    class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
+                                    <option v-for="employee in employees" :key="employee.id" :value="employee.id">
+                                        {{ employee.firstName }} {{ employee.lastName }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
+                                <label class="block text-sm mb-2">ស្ថានភាព</label>
+                                <input type="checkbox" v-model="form.status"
+                                    class="form-checkbox h-5 w-5 text-green-600 transition duration-150 ease-in-out" />
+                            </div>
+
+                        </div>
+
+                        <!-- Submit Button -->
+                        <footer class="w-full relative pt-8 pb-6">
+                            <div class="flex justify-end">
+                                <button type="submit"
+                                    class="bg-[#00992B] rounded-md text-white px-5 py-3 text-sm font-medium">យល់ព្រមបង្កើត</button>
+                            </div>
+                        </footer>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { useRoute } from "vue-router";
+import Swal from "sweetalert2";
+import provincesData from '../../../../../public/provinces.json';
+import districtsData from '../../../../../public/district.json';
+import communesData from '../../../../../public/communes.json';
+import villagesData from '../../../../../public/villages.json';
+import { useRouter, useRoute } from "vue-router";
+import { useStore } from 'vuex';
 
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
-const route = useRoute(); // Get route to fetch ID
+const store = useStore();
+const route = useRoute();  // For getting branch ID from the route
+const router = useRouter();
+const getToken = () => localStorage.getItem('authToken');
 
-// Staff data
-const staffData = ref(null);
-const genderLabel = ref("");
-
-// Address details
-const fullAddress = ref("");
-const getToken = () => {
-	return localStorage.getItem('authToken');
-};
-
-// Axios interceptor to set auth token in headers
 axios.interceptors.request.use(
-	(config) => {
-		const authToken = getToken();
-		if (authToken) {
-			config.headers.Authorization = `Bearer ${authToken}`;
-		}
-		return config;
-	},
-	(error) => {
-		return Promise.reject(error);
-	}
+    (config) => {
+        const authToken = getToken();
+        if (authToken) {
+            config.headers.Authorization = `Bearer ${authToken}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
 );
 
-// Fetch staff details by ID
-const fetchStaffById = async (id) => {
-	try {
-		const response = await axios.get(`${baseUrl}/employees/${id}`, {
-			headers: { Authorization: `Bearer ${getToken()}` },
-		});
-		staffData.value = response.data.data[0];
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-		// Set gender label based on the fetched gender
-		genderLabel.value = staffData.value.staff.gender === "f" ? "ប្រុស" : "ស្រី";
+const form = ref({
+    name: "",
+    villageName_kh: null,
+    communeName_kh: null,
+    districtName_kh: null,
+    provinceName_kh: null,
+    status: true,
+    branchManager: null,
+    created_By: store.getters.getUserId,
+    updated_By: store.getters.getUserId,
+});
 
-		// Format full address
-		const address = staffData.value.address;
-		fullAddress.value = `${address.villageName}, ${address.communeName}, ${address.districtName}, ${address.provinceName}`;
-	} catch (error) {
-		console.error("Error fetching staff details:", error);
-	}
+const provinces = ref([]);
+const districts = ref([]);
+const communes = ref([]);
+const villages = ref([]);
+const employees = ref([]);
+const filteredDistricts = ref([]);
+const filteredCommunes = ref([]);
+const filteredVillages = ref([]);
+
+const fetchAllData = async () => {
+    provinces.value = provincesData.provinces;
+    districts.value = districtsData.district;
+    communes.value = communesData.communes;
+    villages.value = villagesData.villages;
 };
 
-// On mounted, fetch staff by ID
-onMounted(async () => {
-	const id = route.params.id; // Get the staff ID from the URL params
-	await fetchStaffById(id); // Fetch and populate the staff data
+const fetchBranchById = async () => {
+    const branchId = route.params.id; // Get branch ID from the route params
+    try {
+        const response = await axios.get(`${baseUrl}/employees/${branchId}`);
+        const branchData = response.data;
+
+        form.value.name = branchData.name;
+        form.value.status = branchData.status;
+        form.value.branchManager = branchData.branchManager ? branchData.branchManager.id : null;
+
+        // Set province code based on the name
+        const province = provinces.value.find(p => p.name_kh === branchData.provinceName);
+        form.value.provinceName_kh = province ? province.code : null;
+
+        // Filter districts based on province code
+        if (form.value.provinceName_kh) {
+            filterDistricts();
+            const district = filteredDistricts.value.find(d => d.name_kh === branchData.districtName);
+            form.value.districtName_kh = district ? district.code : null;
+        }
+
+        // Filter communes based on district code
+        if (form.value.districtName_kh) {
+            filterCommunes();
+            const commune = filteredCommunes.value.find(c => c.name_kh === branchData.communeName);
+            form.value.communeName_kh = commune ? commune.code : null;
+        }
+
+        // Filter villages based on commune code
+        if (form.value.communeName_kh) {
+            filterVillages();
+            const village = filteredVillages.value.find(v => v.name_kh === branchData.villageName);
+            form.value.villageName_kh = village ? village.code : null;
+        }
+    } catch (error) {
+        console.error("Error fetching branch by ID:", error);
+    }
+};
+
+const filterDistricts = () => {
+    filteredDistricts.value = districts.value.filter(district => district.code.startsWith(form.value.provinceName_kh));
+    form.value.districtName_kh = null;
+    form.value.communeName_kh = null;
+    form.value.villageName_kh = null;
+    filteredCommunes.value = [];
+    filteredVillages.value = [];
+};
+
+const filterCommunes = () => {
+    filteredCommunes.value = communes.value.filter(commune => commune.code.startsWith(form.value.districtName_kh));
+    form.value.communeName_kh = null;
+    form.value.villageName_kh = null;
+    filteredVillages.value = [];
+};
+
+const filterVillages = () => {
+    filteredVillages.value = villages.value.filter(village => village.code.startsWith(form.value.communeName_kh));
+    form.value.villageName_kh = null;
+};
+
+onMounted(() => {
+    fetchEmployees();
+    fetchAllData();
+    fetchBranchById(); // Fetch branch data on component mount
 });
+
+const fetchEmployees = async () => {
+    try {
+        const response = await axios.get(`${baseUrl}/employees`);
+        employees.value = response.data;
+    } catch (error) {
+        console.error('Error fetching employees:', error);
+    }
+};
+
+const handleSubmit = async () => {
+    try {
+        const villageName_kh = villages.value.find(village => village.code === form.value.villageName_kh)?.name_kh;
+        const communeName_kh = communes.value.find(commune => commune.code === form.value.communeName_kh)?.name_kh;
+        const districtName_kh = districts.value.find(district => district.code === form.value.districtName_kh)?.name_kh;
+        const provinceName_kh = provinces.value.find(province => province.code === form.value.provinceName_kh)?.name_kh;
+
+        const payload = {
+            name: form.value.name,
+            branchManager: form.value.branchManager,
+            villageName: villageName_kh,
+            communeName: communeName_kh,
+            districtName: districtName_kh,
+            provinceName: provinceName_kh,
+            status: form.value.status,
+            created_By: form.value.created_By,
+            updated_By: form.value.updated_By,
+            created_At: new Date().toISOString(),
+        };
+
+        await axios.put(`${baseUrl}/branch/${route.params.id}`, payload);
+        router.push("/branch");
+        Swal.fire("Success!", "Branch updated successfully!", "success");
+    } catch (error) {
+        console.error("Error updating branch:", error);
+        Swal.fire("Error!", "Failed to update branch.", "error");
+    }
+};
 </script>
 
 <style scoped>
 .moul-regular {
-	font-family: "Moul", serif;
-	font-weight: 400;
-	font-style: normal;
-}
-
-.siemreap-regular {
-	font-family: "Siemreap", sans-serif;
+    font-family: "Moul", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 </style>

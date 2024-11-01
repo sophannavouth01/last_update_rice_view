@@ -45,7 +45,7 @@
 							{{ item.description || "No description" }}
 						</td>
 						<td class="px-6 text-center siemreap-regular py-3 border whitespace-nowrap overflow-hidden text-ellipsis"
-							:class="{ 'text-[#00992B]': item.status, 'text-red-600': !item.status }">
+							:class="{  'text-red-600': !item.status }">
 							{{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}
 						</td>
 						<td class="border flex justify-center py-2 text-center">
@@ -153,14 +153,14 @@ const role = ref({
 	id: null,
 	name: "",
 	description: "",
-	status: false,
+	status: true,
 });
 
 const selectedRole = ref({
 	id: null,
 	name: "",
 	description: "",
-	status: false,
+	status: true,
 });
 
 const getToken = () => localStorage.getItem("authToken");
@@ -215,7 +215,7 @@ const nextPage = () => {
 };
 
 const openAddModal = () => {
-	role.value = { id: null, name: "", description: "", status: false };
+	role.value = { id: null, name: "", description: "", status: true };
 	isAddModalOpen.value = true;
 };
 
@@ -238,7 +238,7 @@ const handleAddSubmit = async () => {
 		});
 
 		roles.value.unshift(response.data.data);
-		Swal.fire("Success!", "Position added successfully!", "success");
+		// Swal.fire("Success!", "Position added successfully!", "success");
 		closeAddModal();
 		fetchRoles();
 	} catch (error) {
@@ -261,7 +261,7 @@ const handleEditSubmit = async () => {
 		await axios.put(`${baseUrl}/positions/${selectedRole.value.id}`, selectedRole.value, {
 			headers: { Authorization: `Bearer ${getToken()}` },
 		});
-		Swal.fire("Success!", "Position updated successfully!", "success");
+		// Swal.fire("Success!", "Position updated successfully!", "success");
 		closeEditModal();
 		fetchRoles();
 	} catch (error) {

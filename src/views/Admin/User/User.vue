@@ -30,12 +30,11 @@
 						<td class="px-3 py-3 border">{{ item.email }}</td>
 						<td class="px-6 py-3 border">{{ item.branch ? item.branch.name : 'N/A' }}</td>
 						<td class="text-center w-28 py-4 border">{{ item.role.name }}</td>
-						<td class="px-6 py-4 border"
-							:class="{ 'text-[#00992B]': item.active, 'text-red-600': !item.active }">
+						<td class="px-6 py-4 border"	:class="{ 'text-gray-700': item.active, 'text-red-600': !item.active }">
 							{{ item.active ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}
 						</td>
 						<td class="px-6 py-4 border"
-							:class="{ 'text-[#00992B]': item.allowResetPassword, 'text-red-600': !item.allowResetPassword }">
+							:class="{ 'text-gray-700': item.allowResetPassword, 'text-red-600': !item.allowResetPassword }">
 							{{ item.allowResetPassword ? 'អាចផ្លាស់ប្តូរ' : 'មិនអាចផ្លាស់ប្តូរ' }}
 						</td>
 						<td class="flex justify-center border px-2 py-2 text-center">

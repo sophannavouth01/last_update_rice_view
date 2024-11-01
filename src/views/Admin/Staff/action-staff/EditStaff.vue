@@ -256,14 +256,27 @@ const fetchStaffById = async (id) => {
 	  const response = await axios.get(`${baseUrl}/employees/${id}`, {
 		headers: { Authorization: `Bearer ${getToken()}` },
 	  });
-	  
-	  // Use Object.assign to copy API response to form values
+
+	  // Map general employee details to the form
 	  Object.assign(form.value, response.data, {
 		dateOfBirth: response.data.dateOfBirth.slice(0, 10),
 		hireDate: response.data.hireDate.slice(0, 10),
 		position_id: response.data.position.id,
 		branch_id: response.data.branch.id
 	  });
+	  
+	  // Map location codes to actual names using lookup in datasets
+	  form.value.provinceName_kh = response.data.provinceName;
+	  filterDistricts();
+
+	  form.value.districtName_kh = response.data.districtName;
+	  filterCommunes();
+
+	  form.value.communeName_kh = response.data.communeName;
+	  filterVillages();
+
+	  form.value.villageName_kh = response.data.villageName;
+	  
 	} catch (error) {
 	  console.error("Error fetching staff details:", error);
 	}

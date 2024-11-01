@@ -45,7 +45,7 @@
 						</td>
 						<td class="px-6 py-2 text-nowrap  text-center flex justify-center space-x-2">
 							<router-link :to="{ name: 'detail-staff', params: { id: staff.id } }">
-								<button class="bg-[#00992B] px-3 py-2 rounded-md text-white">លម្អិត</button>
+								<button class="px-4 py-2 bg-blue-50 text-center text-[#00992B] rounded-md">លម្អិត</button>
 							</router-link>
 							<router-link :to="{ name: 'edit-staff', params: { id: staff.id } }">
 								<button class="bg-red-500 px-3 py-2 rounded-md text-white">ផ្លាស់ប្តូរ</button>
@@ -86,51 +86,34 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import { format } from 'date-fns';
 
-// Helper to get the auth token
 const getToken = () => localStorage.getItem('authToken');
 
-// API Base URL
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const localStaffs = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = 10;
-const formatCurrency = (value) => {
-	return parseFloat(value).toLocaleString('en-US', {
-		minimumFractionDigits: 2,
-		maximumFractionDigits: 2
-	});
-};
 const formatDate = (dateStr) => {
 	const date = new Date(dateStr);
 	return format(date, "MM/dd/yyyy"); 
 };
-
-// Fetch staff data from API
 const fetchStaffs = async () => {
 	try {
 		const response = await axios.get(`${baseUrl}/employees`, {
 			headers: { Authorization: `Bearer ${getToken()}` },
 		});
-		// Log data to ensure it’s being fetched correctly
 		console.log('Fetched staff data:', response.data);
 		localStaffs.value = response.data || [];
 	} catch (error) {
 		console.error('Error fetching staff:', error);
 	}
 };
-
-// Load data on component mount
 onMounted(fetchStaffs);
-
-// Computed properties for pagination
 const paginatedItems = computed(() => {
 	const start = (currentPage.value - 1) * itemsPerPage;
 	return localStaffs.value.slice(start, start + itemsPerPage);
 });
-
 const totalPages = computed(() => Math.ceil(localStaffs.value.length / itemsPerPage));
 
-// Pagination functions
 const previousPage = () => {
 	if (currentPage.value > 1) currentPage.value--;
 };

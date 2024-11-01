@@ -20,22 +20,25 @@
           </tr>
         </thead>
         <tbody style="border-radius: 10px;">
-          <tr v-for="(item, index) in paginatedItems" :key="item.id" class="bg-white border text-gray-700 hover:bg-[#00992B] hover:text-white">
-            <td class="w-[30px] border px-6 whitespace-nowrap overflow-hidden text-ellipsis">
-              {{ index + 1 + (currentPage - 1) * itemsPerPage }}
-            </td>
-            <td class="px-6 border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.name }}</td>
-            <td class="px-6 border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.description || 'No description' }}</td>
-            <td class="px-6 border whitespace-nowrap overflow-hidden text-ellipsis" :class="item.status ? 'text-green-600' : 'text-red-600'">
-             {{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ'  }}
-            </td>
+  <tr v-for="(item, index) in paginatedItems" 
+      :key="item.id" 
+      class="bg-white border text-gray-700 hover:bg-[#00992B] hover:text-white">
+      
+    <td class="w-[30px] border px-6 whitespace-nowrap overflow-hidden text-ellipsis">
+      {{ index + 1 + (currentPage - 1) * itemsPerPage }}
+    </td>
+    <td class="px-6 border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.name }}</td>
+    <td class="px-6 border whitespace-nowrap overflow-hidden text-ellipsis">{{ item.description || 'No description' }}</td>
+    <td class="px-6 border whitespace-nowrap overflow-hidden text-ellipsis"  :class="[item.status ? 'text-gray-700' : 'text-red-600', 'hover:text-white']">
+      {{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}
+    </td>
 
-            <td class="flex justify-center border px-2 py-2 text-center w-31 border-gray-200">
-              <button @click="openEditModal(item)" class="px-4 py-2 bg-blue-50 text-center text-[#00992B] rounded-md">លម្អិត</button>
-              <!-- <button @click="confirmDelete(item.id)" class="px-4 py-2 ml-2 bg-red-50 text-center text-red-600 rounded-md">លុប</button> -->
-            </td>
-          </tr>
-        </tbody>
+    <td class="flex justify-center border px-2 py-2 text-center w-31 border-gray-200">
+      <button @click="openEditModal(item)" class="px-4 py-2 bg-blue-50 text-center text-[#00992B] rounded-md">លម្អិត</button>
+    </td>
+  </tr>
+</tbody>
+
       </table>
       <nav aria-label="Page navigation example" class="flex justify-end py-3">
         <ul class="inline-flex -space-x-px text-sm">

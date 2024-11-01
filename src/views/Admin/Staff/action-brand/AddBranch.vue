@@ -131,7 +131,7 @@ const form = ref({
     communeName_kh: null,
     districtName_kh: null,
     provinceName_kh: null,
-    status: false,
+    status: true,
     branchManager: "",
     created_By: store.getters.getUserId,
     updated_By: store.getters.getUserId,

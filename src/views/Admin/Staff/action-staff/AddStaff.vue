@@ -207,7 +207,7 @@ const form = ref({
   communeName_kh: null,
   districtName_kh: null,
   provinceName_kh: null,
-  status: false,
+  status: true,
   blackList:false,
   position_id: "",
   branch_id: "",
