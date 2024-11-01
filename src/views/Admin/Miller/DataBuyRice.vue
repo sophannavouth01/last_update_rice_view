@@ -44,7 +44,7 @@
 							}}<span class="px-2 text-red-600">រៀល</span></td>
 						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatDate(item.purchaseDate) }}
 						</td>
-						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.section }}</td>
+						<td class="px-6 border text-center text-nowrap border-gray-200 py-3">{{ item.section }}</td>
 						<td class="px-6 border text-nowrap border-gray-200 py-3"
 							:class="{ 'text-green-500': item.paymentStatus === 'Paid', 'text-red-500': item.paymentStatus !== 'Paid' }">
 							{{ item.paymentStatus === 'Paid' ? 'បានទូទាត់' : 'មិនទាន់' }}

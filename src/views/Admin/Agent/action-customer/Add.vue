@@ -81,7 +81,7 @@
 								<label class="block text-sm mb-2">ភ្នាក់ងារ</label>
 								<select v-model="form.agentId" required
 									class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
-									<option v-for="agent in agents" :key="agent.id" :value="agent.id">{{ agent.name }}
+									<option v-for="agent in agents" :key="agent.id" :value="agent.id">{{ agent.firstName }} {{ agent.lastName }}
 									</option>
 								</select>
 							</div>
