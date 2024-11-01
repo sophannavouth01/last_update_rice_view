@@ -23,9 +23,9 @@
 						<th class="px-6 py-3 text-nowrap border w-[120px] moul-regular">ទម្ងន់សរុប</th>
 						<th class="px-6 py-3 text-nowrap border w-[120px] moul-regular">តម្លៃសរុប</th>
 						<th class="px-6 py-3 text-nowrap border w-[120px] moul-regular">ភ្នាក់ងារ</th>
-						<th class="px-6 py-3 text-nowrap border moul-regular">កាលបរិច្ឆេទទិញ</th>
+						<th class="px-6 py-3 text-nowrap border moul-regular">ម៉ោង</th>
+						<th class="px-6 py-3 text-nowrap border moul-regular">កាលបរិច្ឆេទ</th>
 						<th class="px-6 py-3 text-nowrap border moul-regular">ទូទាត់</th>
-						<th class="px-6 py-3 text-nowrap border moul-regular text-center">លើកទី</th>
 						<th class="px-6 py-3 text-nowrap border w-[140px] text-center moul-regular">ទិញចូលដោយ</th>
 					</tr>
 				</thead>
@@ -36,15 +36,20 @@
 							class="w-[30px] text-nowrap border px-6 py-4 whitespace-nowrap overflow-hidden text-ellipsis">
 							{{ index + 1 }}</td>
 
-						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.customer.firstName }} {{	item.customer.lastName }}</td>
+						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.customer.firstName }} {{
+							item.customer.lastName }}</td>
 						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.quantity }}<span
 								class="px-2 text-red-600">បេ</span></td>
 						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.totalQuantity }}<span
 								class="px-2 text-red-600">Kg</span></td>
-								<td class="px-6 text-nowrap border font-bold">{{formatCurrency( item.totalCost) }} <span class="px-2 text-red-600">រៀល</span></td>
+						<td class="px-6 text-nowrap border font-bold">{{ formatCurrency(item.totalCost) }} <span
+								class="px-2 text-red-600">រៀល</span></td>
 
-						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.agent.firstName }} {{ item.agent.lastName }}</td>
-						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatDate(item.purchaseDate) }}
+						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.agent.firstName }} {{
+							item.agent.lastName }}</td>
+							<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatTime(item.purchaseDate) }}
+						</td>
+						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatOnlyDate(item.purchaseDate) }}
 						</td>
 						<td class="px-6 border text-nowrap border-gray-200 py-3 text-center" :class="{
 							'text-red-500': item.paymentStatus === 'Not yet',
@@ -54,10 +59,9 @@
 								'បានទូទាត់' : item.paymentStatus }}
 						</td>
 
-						<td class="px-6 border text-nowrap border-gray-200 py-3 text-center">{{ item.section }}</td>
 
 						<td class="px-6 text-center border text-nowrap border-gray-200 py-3">{{
-							item.created_By.username}}</td>
+							item.created_By.username }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -99,7 +103,8 @@
 						<select v-model="newRecord.customer_id" id="Miller" required
 							class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
 							<option value="" disabled>ជ្រើសរើសសាខា</option>
-							<option v-for="customer in customers" :key="customer.id" :value="customer.id">{{ customer.firstName }}{{ customer.lastName }}
+							<option v-for="customer in customers" :key="customer.id" :value="customer.id">{{
+								customer.firstName }}{{ customer.lastName }}
 							</option>
 						</select>
 
@@ -125,16 +130,17 @@
 						<select v-model="newRecord.agent_id" id="Miller" required
 							class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
 							<option value="" disabled>ជ្រើសរើសភ្នាក់ងារ</option>
-							<option v-for="agent in agents" :key="agent.id" :value="agent.id">{{ agent.firstName }}{{ agent.lastName }}
+							<option v-for="agent in agents" :key="agent.id" :value="agent.id">{{ agent.firstName }}{{
+								agent.lastName }}
 							</option>
 						</select>
 
 					</div>
-					<div class="mb-4">
+					<!-- <div class="mb-4">
 						<label class="block text-gray-700 mb-2" for="section">លើកទី</label>
 						<input type="text" v-model="newRecord.section" id="section"
 							class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-					</div>
+					</div> -->
 					<div class="flex justify-end">
 						<button type="button" @click="closeModal"
 							class="px-4 py-2 mr-3 bg-gray-300 rounded">បិទ</button>
@@ -229,10 +235,35 @@ const fetchCustomers = async () => {
 	}
 };
 
-const formatDate = (dateStr) => {
+
+const formatTime = (dateStr) => {
 	const date = new Date(dateStr);
-	return format(date, "hh:mm a-EEEE-MMMM-yyyy", { locale: enUS });
+	const hours = date.getHours();
+	const minutes = date.getMinutes().toString().padStart(2, '0');
+	const period = hours < 12 ? 'ព្រឹក' : 'រសៀល';
+	const displayHours = hours % 12 || 12; // Convert to 12-hour format
+
+	return `${displayHours}:${minutes} ${period}`;
 };
+
+const khmerMonths = [
+	"មករា", "កម្ភៃ", "មិនា", "មេសា", "ឧសភា", "មិថុនា",
+	"កក្កដា", "សីហា", "កញ្ញា", "តុលា", "វិច្ឆិការ", "ធ្នូ"
+];
+
+const formatNumberToKhmer = (num) => {
+	return num.toString().split('').map(digit => '០១២៣៤៥៦៧៨៩'[digit]).join('');
+};
+
+const formatOnlyDate = (dateStr) => {
+	const date = new Date(dateStr);
+	const day = formatNumberToKhmer(date.getDate().toString().padStart(2, '0')); // Format day with leading zero
+	const month = khmerMonths[date.getMonth()]; // Get Khmer month name
+	const year = formatNumberToKhmer(date.getFullYear()); // Convert year to Khmer digits
+
+	return `${day}, ${month}, ${year}`;
+};
+
 const calculateQuantity = () => {
 	newRecord.value.totalQuantity = newRecord.value.quantity * 50;
 	newRecord.value.totalCost = newRecord.value.totalQuantity * newRecord.value.cost;
@@ -260,7 +291,7 @@ const closeModal = () => {
 };
 
 const createRecord = async () => {
-	
+
 	try {
 		console.log("Selected Miller ID:", newRecord.value.miller_id);
 		const payload = {

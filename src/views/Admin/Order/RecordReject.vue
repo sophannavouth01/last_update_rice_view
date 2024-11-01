@@ -14,9 +14,8 @@
 						<th class="px-6 py-3 text-nowrap border w-[120px] moul-regular">ភ្នាក់ងារ</th>
 						<th class="px-6 py-3 text-nowrap border w-[100px] moul-regular">ចំនួន</th>
 						<th class="px-6 py-3 text-nowrap border w-[120px] moul-regular">ទម្ងន់សរុប</th>
-						<th class="px-6 py-3 text-nowrap border moul-regular">កាលបរិច្ឆេទទិញ</th>
-						<th class="px-6 py-3 text-nowrap border moul-regular text-center">លើកទី</th>
-
+						<th class="px-6 py-3 text-nowrap border moul-regular">ម៉ោង</th>
+						<th class="px-6 py-3 text-nowrap border moul-regular">កាលបរិច្ឆេទ</th>
 						<th class="px-6 py-3 text-nowrap border w-[140px] text-center moul-regular">ស្នើរសុំ</th>
 						<th class="px-6 py-3 text-nowrap border w-[140px] text-center moul-regular">ស្នើរដោយ</th>
 					</tr>
@@ -33,9 +32,10 @@
 								class="px-2 text-red-600">បេ</span></td>
 						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ item.totalQuantity }}<span
 								class="px-2 text-red-600">Kg</span></td>
-						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatDate(item.purchaseDate) }}
+								<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatTime(item.purchaseDate) }}
 						</td>
-						<td class="px-6 border text-nowrap border-gray-200 py-3 text-center">{{ item.section }}</td>
+						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatOnlyDate(item.purchaseDate) }}
+						</td>
 
 						<td class="px-6 border text-nowrap border-gray-200 py-3 text-center text-red-600"> បដិសេដសំណើរ</td>
 
@@ -94,10 +94,34 @@ const localOrders = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = 10;
 
-const formatDate = (dateStr) => {
+const formatTime = (dateStr) => {
 	const date = new Date(dateStr);
-	return format(date, "hh:mm a - EEEE - MMMM yyyy", { locale: enUS });
+	const hours = date.getHours();
+	const minutes = date.getMinutes().toString().padStart(2, '0');
+	const period = hours < 12 ? 'ព្រឹក' : 'រសៀល';
+	const displayHours = hours % 12 || 12; // Convert to 12-hour format
+
+	return `${displayHours}:${minutes} ${period}`;
 };
+
+const khmerMonths = [
+	"មករា", "កម្ភៃ", "មិនា", "មេសា", "ឧសភា", "មិថុនា",
+	"កក្កដា", "សីហា", "កញ្ញា", "តុលា", "វិច្ឆិការ", "ធ្នូ"
+];
+
+const formatNumberToKhmer = (num) => {
+	return num.toString().split('').map(digit => '០១២៣៤៥៦៧៨៩'[digit]).join('');
+};
+
+const formatOnlyDate = (dateStr) => {
+	const date = new Date(dateStr);
+	const day = formatNumberToKhmer(date.getDate().toString().padStart(2, '0')); // Format day with leading zero
+	const month = khmerMonths[date.getMonth()]; // Get Khmer month name
+	const year = formatNumberToKhmer(date.getFullYear()); // Convert year to Khmer digits
+
+	return `${day}, ${month}, ${year}`;
+};
+
 const fetchOrders = async () => {
 	try {
 		const response = await axios.get(`${baseUrl}/purchase-by-rice-from-miller`);

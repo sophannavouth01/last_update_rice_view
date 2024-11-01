@@ -21,7 +21,7 @@
 						<th class="px-6 py-3 text-nowrap border w-[120px] moul-regular">ទម្ងន់សរុប</th>
 						<th class="px-6 py-3 text-nowrap border moul-regular">ម៉ោង</th>
 						<th class="px-6 py-3 text-nowrap border moul-regular">កាលបរិច្ឆេទ</th>
-						<th class="px-6 py-3 text-nowrap border moul-regular text-center">លើកទី</th>
+						<!-- <th class="px-6 py-3 text-nowrap border moul-regular text-center">លើកទី</th> -->
 
 						<th class="px-6 py-3 text-nowrap border w-[140px] text-center moul-regular">ស្នើរសុំ</th>
 						<th class="px-6 py-3 text-nowrap border w-[140px] text-center moul-regular">ស្នើរដោយ</th>
@@ -44,7 +44,7 @@
 						<td class="px-6 border text-nowrap border-gray-200 py-3">{{ formatOnlyDate(item.purchaseDate) }}
 						</td>
 
-						<td class="px-6 border text-nowrap border-gray-200 py-3 text-center">{{ item.section }}</td>
+						<!-- <td class="px-6 border text-nowrap border-gray-200 py-3 text-center">{{ item.section }}</td> -->
 
 						<td class="px-6 border text-nowrap border-gray-200 py-3 text-center" :class="{
 							'text-orange-500': item.status === 'Pendding Agent Request',
@@ -115,11 +115,11 @@
 							class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
 					</div>
 
-					<div class="mb-4">
+					<!-- <div class="mb-4">
 						<label class="block text-gray-700 mb-2" for="section">លើកទី</label>
 						<input type="text" v-model="newRecord.section" id="section"
 							class="w-full p-2 border rounded border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
-					</div>
+					</div> -->
 					<div class="flex justify-end">
 						<button type="button" @click="closeModal"
 							class="px-4 py-2 mr-3 bg-gray-300 rounded">បិទ</button>
@@ -144,12 +144,7 @@ if (!storedUser) {
 	alert('User not logged in');
 	throw new Error('User not logged in');
 }
-const formatCurrency = (value) => {
-	return parseFloat(value).toLocaleString('en-US', {
-		minimumFractionDigits: 2,
-		maximumFractionDigits: 2
-	});
-};
+
 const isModalOpen = ref(false);
 const agents = ref([]);
 const customers = ref([]);

@@ -85,15 +85,12 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { format } from 'date-fns';
-import { enUS } from 'date-fns/locale';
 
 const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
 if (!storedUser) {
 	alert('User not logged in');
 	throw new Error('User not logged in');
 }
-
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 const localOrders = ref([]);
 const currentPage = ref(1);
@@ -154,7 +151,6 @@ const nextPage = () => {
 	if (currentPage.value < totalPages.value) currentPage.value++;
 };
 onMounted(() => {
-
 	fetchOrders();
 });
 
@@ -177,7 +173,7 @@ const confirmUpdate = async (id, status) => {
 
 const updateStatus = async (id, status) => {
 	try {
-		const updatedBy = storedUser?.id || 2;
+		const updatedBy = storedUser?.id ;
 
 		await axios.patch(`${baseUrl}/purchase-by-rice-from-miller/${id}`, {
 			status: status,
