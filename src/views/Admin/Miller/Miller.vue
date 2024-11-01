@@ -76,7 +76,7 @@
 							{{ item.phone2 }}
 						</td>
 						<td class="px-6 siemreap-regular py-4 border whitespace-nowrap overflow-hidden text-ellipsis"
-							:class="{ 'text-[#00992B]': item.status, 'text-red-600': !item.status }">
+							:class="{  'text-red-600': !item.status }">
 							{{ item.status ? 'ដំណើរការ' : 'ផ្អាកដំណើរការ' }}
 						</td>
 						<td class="p-2 border border-gray-200 whitespace-nowrap overflow-hidden text-ellipsis">

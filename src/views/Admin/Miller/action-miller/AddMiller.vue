@@ -65,19 +65,19 @@
 							<!-- Smart Phone Number -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">Smart</label>
-								<input type="text" v-model="form.phone1" required
+								<input type="text" v-model="form.phone1"
 									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
 							<!-- Celcard Phone Number -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">Cellcard</label>
-								<input type="text" v-model="form.phone2" required
+								<input type="text" v-model="form.phone2" 
 									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
 							<!-- Metfone Phone Number -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">Metfone</label>
-								<input type="text" v-model="form.phone3" required
+								<input type="text" v-model="form.phone3" 
 									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
 						
@@ -143,7 +143,7 @@ const form = ref({
 	phone1: "",
 	phone2: "",
 	phone3: "",
-	status: false,
+	status: true,
 	created_By: store.getters.getUserId,
     updated_By: store.getters.getUserId,
 });

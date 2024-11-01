@@ -173,10 +173,7 @@ const newRecord = ref({
 	CreatedBy: storedUser.username,
 	updated_By: storedUser.id
 });
-const formatDate = (dateStr) => {
-	const date = new Date(dateStr);
-	return format(date, "hh:mm a - EEEE - MMMM yyyy", { locale: enUS });
-};
+
 const formatTime = (dateStr) => {
 	const date = new Date(dateStr);
 	const hours = date.getHours();

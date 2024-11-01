@@ -10,78 +10,80 @@
 						<div class="flex flex-wrap">
 							<!-- Miller Name -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ឈ្មោះរោងម៉ាសុីន</label>
+								<label class="block text-sm mb-2">ឈ្មោះម៉ាសុីន</label>
 								<input type="text" v-model="form.name" required
 									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
-							<!-- Description -->
-							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
-								<label class="block text-sm mb-2">ពិពណ៌នា</label>
-								<input type="text" v-model="form.description" required
-									class="border px-3 py-2 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
-							</div>
+
 							<!-- Province -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">ខេត្ត</label>
-								<select v-model="form.Province" @change="filterDistricts" required
+								<select v-model="form.provinceName_kh" @change="filterDistricts" required
 									class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
 									<option value="" disabled>ជ្រើសរើសខេត្ត</option>
-									<option v-for="province in provinces" :key="province.code" :value="province.code">{{
-										province.name_kh }}</option>
+									<option v-for="province in provinces" :key="province.code" :value="province.code">
+										{{ province.name_kh }}
+									</option>
 								</select>
 							</div>
+
 							<!-- District -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">ស្រុក</label>
-								<select v-model="form.District" @change="filterCommunes" required
+								<select v-model="form.districtName_kh" @change="filterCommunes" required
 									class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
 									<option value="" disabled>ជ្រើសរើសស្រុក</option>
-									<option v-for="district in filteredDistricts" :key="district.code"
-										:value="district.code">{{ district.name_kh }}</option>
+									<option v-for="district in filteredDistricts" :key="district.code" :value="district.code">
+										{{ district.name_kh }}
+									</option>
 								</select>
 							</div>
+
 							<!-- Commune -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">ឃុំ</label>
-								<select v-model="form.Commune" @change="filterVillages" required
+								<select v-model="form.communeName_kh" @change="filterVillages" required
 									class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
 									<option value="" disabled>ជ្រើសរើសឃុំ</option>
-									<option v-for="commune in filteredCommunes" :key="commune.code"
-										:value="commune.code">{{ commune.name_kh }}</option>
+									<option v-for="commune in filteredCommunes" :key="commune.code" :value="commune.code">
+										{{ commune.name_kh }}
+									</option>
 								</select>
 							</div>
+
 							<!-- Village -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">ភូមិ</label>
-								<select v-model="form.villageCode" required
+								<select v-model="form.villageName_kh" required
 									class="border px-3 py-2 text-sm text-blueGray-600 focus:outline-none focus:ring w-full">
 									<option value="" disabled>ជ្រើសរើសភូមិ</option>
-									<option v-for="village in filteredVillages" :key="village.code"
-										:value="village.code">{{ village.name_kh }}</option>
+									<option v-for="village in filteredVillages" :key="village.code" :value="village.code">
+										{{ village.name_kh }}
+									</option>
 								</select>
 							</div>
-							<!-- Smart Phone Number -->
+							
+							<!-- Phone Numbers -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">Smart</label>
-								<input type="text" v-model="form.tel_1" required
+								<input type="text" v-model="form.phone1"
 									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
-							<!-- Cellcard Phone Number -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">Cellcard</label>
-								<input type="text" v-model="form.tel_2" required
+								<input type="text" v-model="form.phone2"
 									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
-							<!-- Metfone Phone Number -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4">
 								<label class="block text-sm mb-2">Metfone</label>
-								<input type="text" v-model="form.tel_3" required
+								<input type="text" v-model="form.phone3"
 									class="border px-3 py-2 text-blueGray-600 bg-white rounded text-sm focus:outline-none focus:ring w-full" />
 							</div>
+
 							<!-- Is Active -->
 							<div class="w-full lg:w-6/12 xl:w-4/12 px-2 mb-4 flex items-center">
 								<label class="block text-sm mb-2 mr-2">ស្ថានភាព</label>
-								<input type="checkbox" v-model="form.active"
+								<input type="checkbox" v-model="form.status"
 									class="form-checkbox h-5 w-5 text-green-600 transition duration-150 ease-in-out" />
 							</div>
 						</div>
@@ -108,43 +110,40 @@ import provincesData from '../../../../../public/provinces.json';
 import districtsData from '../../../../../public/district.json';
 import communesData from '../../../../../public/communes.json';
 import villagesData from '../../../../../public/villages.json';
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useStore } from 'vuex';
-import { useRoute } from "vue-router";
 
 const store = useStore();
-const getToken = () => localStorage.getItem("authToken");
-const route = useRoute(); // Get route to fetch ID
-store.dispatch('loadUserFromStorage');
+const route = useRoute();
+const router = useRouter();
 
+const getToken = () => localStorage.getItem('authToken');
 axios.interceptors.request.use(
-	(config) => {
-		const authToken = getToken();
-		if (authToken) {
-			config.headers.Authorization = `Bearer ${authToken}`;
-		}
-		return config;
-	},
-	(error) => {
-		return Promise.reject(error);
-	}
+    (config) => {
+        const authToken = getToken();
+        if (authToken) {
+            config.headers.Authorization = `Bearer ${authToken}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
 );
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
-const router = useRouter();
 
 const form = ref({
 	name: "",
-	description: "",
 	villageCode: "",
-	Province: "",
-	District: "",
-	Commune: "",
-	tel_1: "",
-	tel_2: "",
-	tel_3: "",
-	active: false,
-	updated_By: getToken(),
+	villageName_kh: null,
+	communeName_kh: null,
+	districtName_kh: null,
+	provinceName_kh: null,
+	phone1: "",
+	phone2: "",
+	phone3: "",
+	status: true,
+	created_By: store.getters.getUserId,
+	updated_By: store.getters.getUserId,
 });
 
 // Address data
@@ -168,84 +167,78 @@ const fetchAllData = async () => {
 
 // Filter districts based on selected province
 const filterDistricts = () => {
-	filteredDistricts.value = districts.value.filter(district => district.code.startsWith(form.value.Province));
-	form.value.District = "";
-	form.value.Commune = "";
-	form.value.villageCode = "";
+	filteredDistricts.value = districts.value.filter(district => district.code.startsWith(form.value.provinceName_kh));
+	form.value.districtName_kh = null;
+	form.value.communeName_kh = null;
+	form.value.villageName_kh = null;
 	filteredCommunes.value = [];
 	filteredVillages.value = [];
 };
 
 // Filter communes based on selected district
 const filterCommunes = () => {
-	filteredCommunes.value = communes.value.filter(commune => commune.code.startsWith(form.value.District));
-	form.value.Commune = "";
-	form.value.villageCode = "";
+	filteredCommunes.value = communes.value.filter(commune => commune.code.startsWith(form.value.districtName_kh));
+	form.value.communeName_kh = null;
+	form.value.villageName_kh = null;
 	filteredVillages.value = [];
 };
 
 // Filter villages based on selected commune
 const filterVillages = () => {
-	filteredVillages.value = villages.value.filter(village => village.code.startsWith(form.value.Commune));
-	form.value.villageCode = "";
+	filteredVillages.value = villages.value.filter(village => village.code.startsWith(form.value.communeName_kh));
+	form.value.villageName_kh = null;
 };
 
-onMounted(async () => {
-	await fetchAllData();
-	const id = route.params.id; // Get the miller ID from the URL params
-	await fetchMillerById(id); // Fetch and populate the miller data
-});
-
 // Fetch miller data by ID
-const fetchMillerById = async (id) => {
+const fetchMillerById = async () => {
+	const millerId = route.params.id;
 	try {
-		const response = await axios.get(`${baseUrl}/miller/${id}`, {
-			headers: { Authorization: `Bearer ${getToken()}` },
-		});
-		const miller = response.data.data[0];
+		const response = await axios.get(`${baseUrl}/miller/${millerId}`);
+		const miller = response.data;
 
-		// Populate the form with fetched data
+		// Populate form data
 		form.value.name = miller.name;
-		form.value.description = miller.description;
-		form.value.villageCode = miller.address.villageCode;
-		form.value.Commune = miller.address.communeCode;
-		form.value.District = miller.address.districtCode;
-		form.value.Province = miller.address.provinceCode;
-		form.value.tel_1 = miller.tel_1;
-		form.value.tel_2 = miller.tel_2;
-		form.value.tel_3 = miller.tel_3;
-		form.value.active = miller.active;
+		form.value.phone1 = miller.phone1;
+		form.value.phone2 = miller.phone2;
+		form.value.phone3 = miller.phone3;
+		form.value.status = miller.status;
 
-		// Trigger the filters sequentially after setting the values
-		await filterDistricts();  // Filter districts based on the selected province
-		await filterCommunes();   // Filter communes based on the selected district
-		await filterVillages();   // Filter villages based on the selected commune
+		// Set location fields based on names
+		form.value.provinceName_kh = provinces.value.find(p => p.name_kh === miller.provinceName)?.code || "";
+		await filterDistricts();
+		form.value.districtName_kh = districts.value.find(d => d.name_kh === miller.districtName)?.code || "";
+		await filterCommunes();
+		form.value.communeName_kh = communes.value.find(c => c.name_kh === miller.communeName)?.code || "";
+		await filterVillages();
+		form.value.villageName_kh = villages.value.find(v => v.name_kh === miller.villageName)?.code || "";
 
 	} catch (error) {
-		console.error("Error fetching miller details:", error);
+		console.error("Error fetching miller by ID:", error);
 	}
 };
 
-// Handle form submission for editing miller details
-const handleSubmit = async () => {
-	const updatedBy = store.getters.getUserId;
-	const payload = {
-		name: form.value.name,
-		description: form.value.description,
-		villageCode: form.value.villageCode,
-		tel_1: form.value.tel_1,
-		tel_2: form.value.tel_2,
-		tel_3: form.value.tel_3,
-		active: form.value.active,
-		updated_By: updatedBy,
-	};
+onMounted(() => {
+	fetchAllData();
+	fetchMillerById();
+});
 
+const handleSubmit = async () => {
 	try {
-		const response = await axios.put(`${baseUrl}/miller/${route.params.id}`, payload, {
-			headers: { Authorization: `Bearer ${getToken()}` },
-		});
-		console.log("Miller updated successfully:", response.data);
-		Swal.fire("Success!", "Miller updated successfully!.", "success");
+		const payload = {
+			name: form.value.name,
+			phone1: form.value.phone1,
+			phone2: form.value.phone2,
+			phone3: form.value.phone3,
+			villageName: villages.value.find(v => v.code === form.value.villageName_kh)?.name_kh,
+			communeName: communes.value.find(c => c.code === form.value.communeName_kh)?.name_kh,
+			districtName: districts.value.find(d => d.code === form.value.districtName_kh)?.name_kh,
+			provinceName: provinces.value.find(p => p.code === form.value.provinceName_kh)?.name_kh,
+			status: form.value.status,
+			updated_By: store.getters.getUserId,
+		};
+
+		await axios.put(`${baseUrl}/miller/${route.params.id}`, payload);
+		Swal.fire("Success!", "Miller updated successfully!", "success");
 		router.push("/miller");
 	} catch (error) {
 		console.error("Error updating miller:", error);
@@ -259,9 +252,5 @@ const handleSubmit = async () => {
 	font-family: "Moul", serif;
 	font-weight: 400;
 	font-style: normal;
-}
-
-.siemreap-regular {
-	font-family: "Siemreap", sans-serif;
 }
 </style>

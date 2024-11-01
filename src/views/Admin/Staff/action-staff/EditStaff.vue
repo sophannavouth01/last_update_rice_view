@@ -1,6 +1,6 @@
 <template>
 	<div class="relative flex flex-col min-w-0 break-words w-full mb-3 shadow-lg rounded-lg bg-white border-0 p-5">
-	  <p class="text-lg font-semibold underline text-[#00992B] moul-regular mb-6">បង្កើតបុគ្គលិក</p>
+	  <p class="text-lg font-semibold underline text-[#00992B] moul-regular mb-6">កែប្រែព័ត៌មានបុគ្គលិក</p>
 	  <div>
 		<section class="bg-blueGray-50">
 		  <div class="w-full mx-auto mt-6">

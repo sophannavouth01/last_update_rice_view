@@ -44,12 +44,12 @@
 							</span>
 						</td>
 						<td class="px-6 py-2 text-nowrap  text-center flex justify-center space-x-2">
-							<router-link :to="{ name: 'detail-staff', params: { id: staff.id } }">
+							<router-link :to="{ name: 'edit-staff', params: { id: staff.id } }">
 								<button class="px-4 py-2 bg-blue-50 text-center text-[#00992B] rounded-md">លម្អិត</button>
 							</router-link>
-							<router-link :to="{ name: 'edit-staff', params: { id: staff.id } }">
+							<!-- <router-link :to="{ name: 'edit-staff', params: { id: staff.id } }">
 								<button class="bg-red-500 px-3 py-2 rounded-md text-white">ផ្លាស់ប្តូរ</button>
-							</router-link>
+							</router-link> -->
 						</td>
 					</tr>
 				</tbody>
